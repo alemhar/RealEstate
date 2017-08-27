@@ -54,7 +54,6 @@
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="/"><img src="/img/sblogo.png"></a>
             </div>
-        
         @if (Auth::guest())
         
             <!-- div class="collapse navbar-collapse" id="app-navbar-collapse" -->
@@ -109,6 +108,10 @@
         @endif
                 
             <!-- /div -->
+            
+            
+            
+            
             
         <!-- /div -->
     </nav>

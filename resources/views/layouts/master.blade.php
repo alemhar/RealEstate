@@ -32,20 +32,15 @@
     
     <!-- Dropzone JS Style -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" rel="stylesheet" type="text/css">
-    
+    <!--dropzone CSS-->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
+
     <!--Sweet alert files-->
     <script src="{{asset('js/sweetalert-dev.js')}}"></script>
     <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
 
-    <!--dropzone CSS-->
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
+    
 
     <!--Vue  scripts-->
     <script src="https://unpkg.com/vue"></script>
@@ -104,6 +99,12 @@
             <!-- /.navbar-top-links -->
 
                     <ul class="nav navbar-top-links navbar-left">
+                    @if (Auth::guest()) 
+                        <li>
+                            <a href="/listings"><i class="fa fa-table fa-fw"></i> All Listing</a>
+                        </li>
+                    
+                    @else    
                         <li>
                             <a href="/"><i class="fa fa-home fa-fw"></i> Home</a>
                         </li>
@@ -116,6 +117,7 @@
                         <li>
                             <a href="/mylistings/{{ Auth::user()->id }}"><i class="fa fa-list-alt fa-fw"></i> My Listing</a>
                         </li>
+                    @endif
                     </ul>
                
     </nav>
