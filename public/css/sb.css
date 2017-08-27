@@ -972,11 +972,12 @@ body.stop-scrolling {
     line-height: 55px;
     height: 55px;
     padding-top: 0;
+    padding-bottom: 0;
 }
 
 .sidebar {
     margin-top: 0;
     padding-top: 0;
-    border-right: 1px solid gray;
+    border-right: 1px solid #ddd;
 }
 

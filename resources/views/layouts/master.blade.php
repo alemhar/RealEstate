@@ -96,6 +96,7 @@
                     </li>
                 @endif
             </ul>
+            
             <!-- /.navbar-top-links -->
 
                     <ul class="nav navbar-top-links navbar-left">
