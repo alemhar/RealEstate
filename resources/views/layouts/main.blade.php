@@ -1,126 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
+ 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Laravel</title>
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Styles -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
-    <!-- MetisMenu CSS -->
-    <link href="{{asset('vendor/metisMenu/metisMenu.min.css')}}" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lato';
+        }
 
-    <!-- Custom CSS -->
-    <link href="{{asset('dist/css/sb-admin-2.css')}}" rel="stylesheet">
-
-    <!-- Morris Charts CSS -->
-    <link href="{{asset('vendor/morrisjs/morris.css')}}" rel="stylesheet">
-
-    <!-- Custom Fonts -->
-    <link href="{{asset('vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
-
+        .fa-btn {
+            margin-right: 6px;
+        }
+    </style>
     
     <!-- Dropzone JS Style -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.css" rel="stylesheet" type="text/css">
-    
-    <!--Sweet alert files-->
-    <script src="{{asset('js/sweetalert-dev.js')}}"></script>
-    <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert.css')}}">
-
     <!--dropzone CSS-->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.3.0/dropzone.css">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!--Vue  scripts-->
-    <script src="https://unpkg.com/vue"></script>
+    <!--Sweet alert files-->
+    <script src="{{asset('js/sb-dev.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/sb.css')}}">
 
 </head>
-
 <body>
-    
-<div class="container-fluid">
-
+<div class="container-fluid">    
     <div id="wrapper">
-
-        
-        <!-- Navigation -->
-        
-        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom:0;">
+    <nav class="navbar navbar-default navbar-static-top">
+        <!-- div class="container" -->
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
+
+                <!-- Collapsed Hamburger -->
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                    <span class="sr-only">Toggle Navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
+
+                <!-- Branding Image -->
                 <a class="navbar-brand" href="/"><img src="/img/sblogo.png"></a>
             </div>
-            <!-- /.navbar-header -->
 
-            <!-- Right Side Of Navbar -->
-            <ul class="nav navbar-top-links navbar-right">
-                <!-- Authentication Links -->
-                @if (Auth::guest())
-                    <li><a href="{{ route('/login') }}">Login</a></li>
-                    <li><a href="{{ route('/register') }}">Register</a></li>
-                @else
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                            Hello, {{ Auth::user()->name }} <span class="caret"></span>
-                        </a>
-
-                        <ul class="dropdown-menu" role="menu">
-                            <li>
-                                <a href="{{ route('/logout') }}"
-                                    onclick="event.preventDefault();
-                                                document.getElementById('logout-form').submit();">
-                                    Logout
-                                </a>
-
-                                <form id="logout-form" action="{{ route('/logout') }}" method="POST" style="display: none;">
-                                    {{ csrf_field() }}
-                                </form>
-                            </li>
-                        </ul>
+            <!-- div class="collapse navbar-collapse" id="app-navbar-collapse" -->
+                <!-- Left Side Of Navbar -->
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url('/home') }}"> <i class="fa fa-home fa-fw"></i>Home</a></li>
+                    <li>
+                        <a href="/post/create"><i class="fa fa-plus fa-fw"></i> Create Flyer</a>
                     </li>
-                @endif
-            </ul>
-            <!-- /.navbar-top-links -->
+                    <li>
+                        <a href="/listings"><i class="fa fa-table fa-fw"></i> All Listing</a>
+                    </li>
+                    <li>
+                        <a href="/mylistings/{{ Auth::user()->id }}"><i class="fa fa-list-alt fa-fw"></i> My Listing</a>
+                    </li>
+                </ul>
 
-                    <ul class="nav navbar-top-links navbar-left">
-                        <li>
-                            <a href="/"><i class="fa fa-home fa-fw"></i> Home</a>
+                <!-- Right Side Of Navbar -->
+                <ul class="nav navbar-nav navbar-right">
+                    <!-- Authentication Links -->
+                    @if (Auth::guest())
+                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/register') }}">Register</a></li>
+                    @else
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            </ul>
                         </li>
-                        <li>
-                            <a href="/flyers/create"><i class="fa fa-plus fa-fw"></i> Create Flyer</a>
-                        </li>
-                        <li>
-                            <a href="/listings"><i class="fa fa-table fa-fw"></i> All Listing</a>
-                        </li>
-                        <li>
-                            <a href="/mylistings/{{ Auth::user()->id }}"><i class="fa fa-list-alt fa-fw"></i> My Listing</a>
-                        </li>
-                    </ul>
-               
+                    @endif
+                </ul>
+                
+                
+                
+            <!-- /div -->
+            
+            
+            
+            
+            
+        <!-- /div -->
     </nav>
-    </div>    
-        <div class="container sidebar" style="margin-top:0;">
+    </div>
+    </div>
+    <div class="container sidebar col-md-3 float-md-left" style="margin-top:0;">
         <h4>Search</h4>
         <form role="form">
             <div class="row">
@@ -1792,18 +1773,8 @@
         </form>
         </div>
 
-    <div id="page-wrapper">
+    @yield('content')
 
-        <div class="row">
-            @yield('content')
-
-        </div>
-    </div>
-
-    </div>
-    <!-- /#wrapper -->
-
-    <!-- jQuery -->
     <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 
     <!-- Bootstrap Core JavaScript -->
@@ -1818,11 +1789,22 @@
     <script src="{{asset('data/morris-data.js')}}"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="{{asset('dist/js/sb-admin-2.js')}}"></script>
+    <script src="{{asset('dist/js/sb.js')}}"></script>
+
+    <!-- JavaScripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    
     @yield('scripts.footer')
 
     @include('flash')
-</div>    
-</body>
+    
+    
+   
 
+    
+    
+    
+</body>
 </html>
