@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 
 class PostController extends Controller
-{
+{   
+    public function __construct(){
+        $this->middleware('auth', ['except'=>['index','show']]);
+    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        echo 'Create';
+        return view('posts.create');
     }
 
     /**
