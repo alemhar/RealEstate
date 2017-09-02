@@ -19,4 +19,6 @@ Route::group(['middleware' => 'web'], function () {
         return view('welcome');
     });
     Route::get('/home', 'HomeController@index');
+    
+    Route::resource('post', 'PostController');
 });
