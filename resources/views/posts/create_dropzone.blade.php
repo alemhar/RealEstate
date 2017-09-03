@@ -10,7 +10,7 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-12">
-                        <form role="form" method="post" action="/post" enctype="multipart/form-data">
+                        <form role="form" method="post" action="/post" enctype="multipart/form-data" id="createForm" class="dropzone">
                             {{ csrf_field() }}
                             <div class="col-md-6">
                                 <div class="form-group col-md-3">
@@ -19,7 +19,6 @@
                                 <div class="form-group col-md-3">
                                         <label class="inlinelabel">Rent :</label><input class="inlineinputs" type="checkbox" name="rent" value="1">
                                 </div>
-                                
                                 <div style="clear:both"></div>
                                 
                                 
@@ -1700,12 +1699,6 @@
                                             <input class="form-control" type="number" name="floor" id="floor"  placeholder="Number of floors?" >
                                             
                                 </div>
-                                <div class="form-group col-md-6">
-                                    
-                                        <label>Garage : </label> <input class="form-control" type="number" name="garage" placeholder="Garage?" >
-                                        
-                                        
-                                </div>
                                 <div class="clearfix"></div>
                                 <div class="form-group col-md-6">
                                     <label >Land Area</label>
@@ -1725,17 +1718,25 @@
                                     <label>Bathroom(s)</label>
                                     <input class="form-control" type="number" name="bathroom"  placeholder="Bathrooms?">
                                 </div>
-                                
-                                
-                                <div style="clear:both"></div>
-                                <div class="form-group col-md-12">
-                                    <label >Additional Information</label>
-                                    <textarea class="form-control" type="text" name="description" rows="5"></textarea>
+                                <div class="form-group col-md-6">
+                                    
+                                        <label class="inlinelabel">Garage : </label> <input class="form-control inlineinputs" type="number" name="garage" style="width:110px;">
+                                        
+                                        
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label class="inlinelabel">Fully Furnished :</label>
                                     <input class="inlineinputs" type="checkbox" name="furnished" value="1">
                                 </div>
+                                <div style="clear:both"></div>
+                                <div class="form-group col-md-12">
+                                    <label >Additional Information</label>
+                                    <textarea class="form-control" type="text" name="description" rows="5"></textarea>
+                                </div>
+                                
+                                
+
+
                                 
                             </div>
                             <div style="clear:both"></div>
@@ -1750,7 +1751,13 @@
                                 </div>
                             </div>
                             <br>
-                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                
+                                <div class="dropzone-previews">Add Photos.</div> 
+                                </div>
+                            </div>
+
                             <div class="row">
                                 @if (count($errors) > 0)
                                     <div class="alert alert-danger">
@@ -1773,6 +1780,65 @@
 @endsection
 
 @section('scripts.footer')
+    <!--<script src="{{asset('js/dropzone.js')}}"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.1.1/min/dropzone.min.js"></script>
+    <script>
+        Dropzone.options.createForm = {
+            
+            paramName: 'photo',
+            //maxFile: 4,
+            resizeWidth: 400,
+            filesizeBase: 1024,
+            acceptedFiles: '.jpg, .jpeg, .png, .bmp',
+            autoProcessQueue: false,
+            uploadMultiple: true,
+            parallelUploads: 100,
+            maxFiles: 6,
+            thumbnailWidth: 120,
+            thumbnailHeight: null,
+            //addRemoveLinks: true,
+            //maxFilesize: 8,
+            //dictFileTooBig: 'Image is bigger than 8MB',
+            //dictRemoveFile: 'Remove',
+            //dictDefaultMessage: 'Drop photos here...',
+            // The setting up of the dropzone
+          init: function() {
+            var myDropzone = this;
+              
+              
+            // First change the button to actually tell Dropzone to process the queue.
+            this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+              // Make sure that the form isn't actually being sent.
+              e.preventDefault();
+              e.stopPropagation();
+              myDropzone.processQueue();
+               
+            });
+              
+            // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
+            // of the sending event because uploadMultiple is set to true.
+            this.on("sendingmultiple", function() {
+              // Gets triggered when the form is actually being sent.
+              // Hide the success button or the complete form.
+                
+            });
+            this.on("successmultiple", function(files, response) {
+              // Gets triggered when the files have successfully been sent.
+              // Redirect user or notify of success.
+                //alert(JSON.stringify(files));
+                //alert(JSON.stringify(response));
+                
+            });
+            this.on("errormultiple", function(files, response) {
+              // Gets triggered when there was an error sending the files.
+              // Maybe show form again, and notify user of error
+                
+                
+            });
+          }
+            
+        }
+    </script>
 
 @stop
 

@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Contracts\Auth\Guard;
+use Auth;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-
+use App\Post;
+use App\Photo;
 use App\Http\Requests;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class PostController extends Controller
 {   
@@ -40,7 +44,23 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        echo 'Save';
+        //$files = $request->files->get('photo');
+        
+        
+        //return 'Test';
+        //$photo=$request->file('photo');
+        
+        $id = Auth::user()->id;
+        $post = new Post($request->all());
+        $post->user_id = Auth::user()->id;
+        $post->save();
+        
+        //$request->session()->flash('Success', 'New listing created successfully!');
+        
+        ////flash()->success('Success', 'New listing created successfully!');
+
+        //return redirect()->back(); //return back
+        return redirect()->route('post.show',['id' => $id]);
     }
 
     /**
@@ -51,9 +71,22 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        echo 'Show :'.$id;
+        if (!empty($id)){
+        $post = Post::find($id);
+        $photos = $post->photo;
+        $maxFiles = 6 - count($photos);
+        //echo $photo;    
+        return view('posts.show', compact('post','photos','maxFiles'));
+        } else {
+            //return 'Empty';
+        }
+        
     }
 
+    
+
+
+    
     /**
      * Show the form for editing the specified resource.
      *
@@ -74,7 +107,7 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        echo 'Update :'.$id;
+ 
     }
 
     /**
@@ -86,5 +119,37 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
+    }
+    
+    public function uploadImages($id, Request $request){
+        
+        //$flyer=Flyer::find($id);
+        
+        $image=$request->file('photo');
+        if($image){
+            $imageName=$image->getClientOriginalName();
+            $extension = pathinfo($imageName, PATHINFO_EXTENSION);
+            $submitTime = Carbon::now();
+            $email = Auth::user()->email;
+            $email = str_replace(array('.', '@'),'-',$email);
+                
+            $imageName = $email . '-' . $submitTime->format('Y-m-d-H-m-s') . '.' . $extension;
+            
+            $image->move('img/photos',$imageName);
+            //$formInput['image']=$imageName;
+            $path = "/img/photos/$imageName";
+            //return $path;
+            
+            //$flyer->photo()->create(['path'=>$path]);
+            $photo = new Photo;
+            $photo->post_id = $id;
+            $photo->path = $path;
+            $photo->save();
+            
+        }
+       
+        
+        return $extension;
+        
     }
 }

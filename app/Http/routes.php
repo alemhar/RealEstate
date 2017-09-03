@@ -14,11 +14,12 @@
 
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
+    Route::post('post/uploadImage/{id}', 'PostController@uploadImages');
+    Route::resource('post', 'PostController');
     Route::get('/', function () {
         //return 'Landing Page';
         return view('welcome');
     });
     Route::get('/home', 'HomeController@index');
     
-    Route::resource('post', 'PostController');
 });

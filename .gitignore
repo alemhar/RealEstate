@@ -1,4 +1,6 @@
+nothing
 /vendor
 /node_modules
 /public/storage
 .env
+/public/img/photos
