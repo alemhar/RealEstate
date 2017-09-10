@@ -1785,7 +1785,7 @@
             </div>
         </form>
         </div>
-    <div style="padding-top:20px;">
+    <div style="padding-top:20px;" class="container sidebar col-md-9 float-md-right">
         @yield('content')
     </div>    
     <!-- script src="{{asset('vendor/jquery/jquery.min.js')}}"></script -->

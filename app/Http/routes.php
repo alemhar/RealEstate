@@ -15,6 +15,7 @@
 Route::group(['middleware' => 'web'], function () {
     Route::auth();
     Route::post('post/uploadImage/{id}', 'PostController@uploadImages');
+    Route::get('/listings', 'PostController@allPosts');
     Route::resource('post', 'PostController');
     Route::get('/', function () {
         //return 'Landing Page';

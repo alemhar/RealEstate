@@ -22,16 +22,16 @@
         <div class="description">{!! nl2br($post->description) !!}</div>
     </div>
         
-    <!div class="col-md-8">
+    <div class="col-md-8">
         @if(empty($photos))
-            <div class="row" style="margin-top:20px;">
+               <div class="row" style="margin-top:20px;">
                 <h4 style="align:center;margin-left:100px;">No images for this listing</h4>
-            </div>
+              </div>
         @else
                             
-           <div class="row" style="margin-top:20px;">
+               <div class="row" style="margin-top:20px;">
                     @foreach($photos as $photo)
-                        <img src="{{ $photo->path }}" alt=""/>
+                        <img src="{{ $photo->path }}" alt="" height="120" width="150" class="img-thumbnail"/>
                     @endforeach 
                 </div>
             
@@ -77,7 +77,7 @@
             
             paramName: 'photo',
             maxFiles: '<?php echo $maxFiles ?>',
-            resizeWidth: 300,
+            resizeWidth: 600,
             filesizeBase: 1024,
             acceptedFiles: '.jpg, .jpeg, .png, .bmp',
             

@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class PostController extends Controller
 {   
     public function __construct(){
-        $this->middleware('auth', ['except'=>['index','show']]);
+        $this->middleware('auth', ['except'=>['index','show','allPosts']]);
     }
     
     /**
@@ -26,6 +26,20 @@ class PostController extends Controller
         echo 'All';
     }
 
+    public function allPosts(Request $request){
+         $listings = Post::all(); //gets all results from flyer table
+        //$listings = Photo::with('photo')->get();
+        //return $listings;
+        if (count($listings)) {
+            
+            return view('posts.posts', compact('listings'));
+            // return $listings;
+
+        }else{
+            return "no records!! Please create new listings";
+        }
+        
+    }
     /**
      * Show the form for creating a new resource.
      *
