@@ -1,54 +1,53 @@
 @extends('layouts.main')
 
 @section('content')
-
-    <div class="col-md-9">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                Add Photo:
-            </div>
-            <div class="panel-body">
-                <div class="row">
+<div class="panel-body">
                     <div class="col-md-12">
-                     <div class="col-md-4">
-        <h1 class="page-header">{!! $post->subject !!}</h1>
+        <h3 class="page-header">{!! $post->subject !!} : {!! number_format($post->amount) !!} Php</h3>
         <h4>
-            <i class="fa fa-map-marker" aria-hidden="true"></i> {{ $post->address}} 
+            <b>Address : </b>  
+            {{ $post->address}}, {{ $post->area}}, {{ $post->city}}   
         </h4>
-            <br><i> Posted </i> <b>{{ $post->created_at->diffForHumans() }}</b>
         
-        <h3>{!! $post->amount !!}</h3>
-
-        <div class="description">{!! nl2br($post->description) !!}</div>
-    </div>
+                         <h4 class="description"><b>Description :</b> {!! nl2br($post->description) !!}</h4>
+        <i> Added : </i> <b>{{ $post->created_at->diffForHumans() }}</b>                 
+    
         
-    <div class="col-md-8">
+   
         @if(empty($photos))
                <div class="row" style="margin-top:20px;">
                 <h4 style="align:center;margin-left:100px;">No images for this listing</h4>
               </div>
         @else
-                            
-               <div class="row" style="margin-top:20px;">
+    <hr>    
+    <h4 >Photos: </h4>     
+            
+               <div class="container row" style="margin-top:20px;">
                     @foreach($photos as $photo)
-                        <img src="{{ $photo->path }}" alt="" height="120" width="150" class="img-thumbnail"/>
+                        <img src="{{ $photo->path }}" alt="" height="120" width="140" class="img-thumbnail"/>
                     @endforeach 
                 </div>
             
         @endif 
-    </div>
+    
                         
                             <br>
-                        @if(count($photos) < 10)
-                            <div class="col-lg-12">
-                                <h3>Add your photos here</h3>
+                    @if (Auth::guest())
+
+                        
+                    @else
+                        @if(count($photos) < 7)
+                            <div class="container row col-lg-12">
+                                <h4>Add your photos here : </h4>
                                 <form id="addPhotosForm" 
                                         action="uploadImage/{{$post->id}}" 
                                         method="POST" class="dropzone">
                                     {{ csrf_field() }}
                                 </form>
                             </div>
-                        @endif 
+                        @endif
+                    @endif
+                    
                             <div class="row">
                                 @if (count($errors) > 0)
                                     <div class="alert alert-danger">
@@ -62,10 +61,9 @@
 
                             </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
+              
+       
+    
 
 @endsection
 
