@@ -28,8 +28,10 @@ class PostController extends Controller
 
     public function allPosts(Request $request){
          $listings = Post::all(); //gets all results from flyer table
+         
         //$listings = Photo::with('photo')->get();
         //return $listings;
+        
         if (count($listings)) {
             
             return view('posts.posts', compact('listings'));

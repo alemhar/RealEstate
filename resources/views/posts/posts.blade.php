@@ -28,6 +28,9 @@
                         <p>{!! str_limit(nl2br($listing->description), 500) !!}</p>
                         <p>{!! str_limit(nl2br($listing->address), 500) !!}</p>
                         <p>{!! str_limit(nl2br($listing->area), 500) !!} - {!! str_limit(nl2br($listing->city), 500) !!}</p>
+                        <p>Mobile : {!! $listing->user->mobileno1 !!}</p>
+                        
+                        
                         
                     </div>
                 </div>

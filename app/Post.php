@@ -45,5 +45,8 @@ class Post extends Model
         return $this->hasMany('App\Photo');
     }
 
-    
+    public function user()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
 }
