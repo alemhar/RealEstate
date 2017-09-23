@@ -40,6 +40,7 @@ class PostController extends Controller
 
     public function myPosts($id){
         $listings = Post::find($id)->all(); 
+        
          //$listings = Post::where('id',$id)->first();
         if (count($listings)) {
             return view('posts.posts', compact('listings'));
