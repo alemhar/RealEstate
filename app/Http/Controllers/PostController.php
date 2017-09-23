@@ -27,13 +27,21 @@ class PostController extends Controller
     }
 
     public function allPosts(Request $request){
-         $listings = Post::all(); //gets all results from flyer table
+         $listings = Post::all(); 
          
-        //$listings = Photo::with('photo')->get();
-        //return $listings;
-        
         if (count($listings)) {
-            
+            return view('posts.posts', compact('listings'));
+            // return $listings;
+
+        }else{
+            return "no records!! Please create new listings";
+        }
+    }
+
+    public function myPosts($id){
+        $listings = Post::find($id)->all(); 
+         //$listings = Post::where('id',$id)->first();
+        if (count($listings)) {
             return view('posts.posts', compact('listings'));
             // return $listings;
 

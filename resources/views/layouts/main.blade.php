@@ -86,7 +86,7 @@
                         <a href="/listings"><i class="fa fa-table fa-fw"></i> All Listing</a>
                     </li>
                     <li>
-                        <a href="/mylistings/{{ Auth::user()->id }}"><i class="fa fa-list-alt fa-fw"></i> My Listing</a>
+                        <a href="/listings/{{ Auth::user()->id }}"><i class="fa fa-list-alt fa-fw"></i> My Listing</a>
                     </li>
                 </ul>
                 

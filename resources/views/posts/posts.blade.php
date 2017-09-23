@@ -24,7 +24,7 @@
                         @endif
                     </div>
                     <div class="col-md-9">
-                        <h4><a href="post/{!! $listing->id !!}"> {!! $listing->subject !!} </a> : {{ number_format($listing->amount) }} Php</h4>
+                        <h4><a href="/post/{!! $listing->id !!}"> {!! $listing->subject !!} </a> : {{ number_format($listing->amount) }} Php</h4>
                         <p>{!! str_limit(nl2br($listing->description), 500) !!}</p>
                         <p>{!! str_limit(nl2br($listing->address), 500) !!}</p>
                         <p>{!! str_limit(nl2br($listing->area), 500) !!} - {!! str_limit(nl2br($listing->city), 500) !!}</p>
